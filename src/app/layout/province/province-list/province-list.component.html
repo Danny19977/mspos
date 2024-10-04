@@ -1,0 +1,290 @@
+<!-- Page Wrapper -->
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <h4 class="page-title">
+                                Provinces<span class="count-title">{{length}}</span>
+                            </h4>
+                        </div>
+                        <div class="col-8 text-end">
+                            <div class="head-icons">
+                                <app-reload></app-reload>
+                                <app-collapse-header></app-collapse-header>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Page Header -->
+
+                <div class="card">
+                    <div class="card-header">
+                        <!-- Search -->
+                        <div class="row align-items-center">
+                            <div class="col-sm-4">
+                                <div class="icon-form mb-3 mb-sm-0">
+                                    <span class="form-icon"><i class="ti ti-search"></i></span>
+                                    <input type="text" (keyup)="applyFilter($event)" class="form-control"
+                                        placeholder="Ex. jean kasongo" #input />
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="d-flex align-items-center flex-wrap row-gap-2 justify-content-sm-end">
+                                    <div class="dropdown me-2">
+                                        <a href="javascript:void(0);" class="dropdown-toggle"
+                                            data-bs-toggle="dropdown"><i
+                                                class="ti ti-package-export me-2"></i>Export</a>
+                                        <div class="dropdown-menu  dropdown-menu-end">
+                                            <ul>
+                                                <li>
+                                                    <a href="javascript:void(0);" class="dropdown-item"><i
+                                                            class="ti ti-file-type-pdf text-danger me-1"></i>Export as
+                                                        PDF</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0);" class="dropdown-item"><i
+                                                            class="ti ti-file-type-xls text-green me-1"></i>Export as
+                                                        Excel </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <a href="javascript:void(0);" class="btn btn-primary" data-bs-toggle="offcanvas"
+                                        data-bs-target="#offcanvas_add">
+                                        <i class="ti ti-square-rounded-plus me-2"></i>
+                                        Add New Province
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Search -->
+                    </div>
+                    <div class="card-body">
+                        <div class="card-body">
+                            <div class="table-responsive custom-table">
+                                <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)"
+                                    class="mat-elevation-z2 table">
+    
+                                    <!-- name Column -->
+                                    <ng-container matColumnDef="name">
+                                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                                    </ng-container>
+    
+                                    <!-- area Column -->
+                                    <ng-container matColumnDef="area">
+                                        <th mat-header-cell *matHeaderCellDef> Total Area </th>
+                                        <td mat-cell *matCellDef="let element"> 
+                                            <app-area-count [id]="element.id"></app-area-count>
+                                        </td>
+                                    </ng-container>
+    
+                                    <!-- pos Column -->
+                                    <ng-container matColumnDef="pos">
+                                        <th mat-header-cell *matHeaderCellDef> Total POS </th>
+                                        <td mat-cell *matCellDef="let element"> 
+                                            @if (element.id){
+                                                <app-pos-count [id]="element.id"></app-pos-count>
+                                                }    
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- sup Column -->
+                                    <ng-container matColumnDef="sup">
+                                        <th mat-header-cell *matHeaderCellDef> Total Sup </th>
+                                        <td mat-cell *matCellDef="let element"> 
+                                            @if (element.id){
+                                                <app-sup-count [id]="element.id"></app-sup-count>
+                                                }
+                                        </td>
+                                    </ng-container>
+
+                                    <!-- dr Column -->
+                                    <ng-container matColumnDef="dr">
+                                        <th mat-header-cell *matHeaderCellDef> DR </th>
+                                        <td mat-cell *matCellDef="let element"> 
+                                            @if (element.id) {
+                                                <app-dr-count [id]="element.id"></app-dr-count>
+                                                }
+                                        </td>
+                                    </ng-container>
+    
+                                    <!-- id Column -->
+                                    <ng-container matColumnDef="id">
+                                        <th mat-header-cell *matHeaderCellDef> Action </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <button mat-icon-button (click)="findValue(element.id)"
+                                                data-bs-toggle="offcanvas" data-bs-target="#offcanvas_edit">
+                                                <mat-icon class="text-blue">edit</mat-icon>
+                                            </button>
+                                            <button mat-icon-button (click)="findValue(element.id)" data-bs-toggle="modal"
+                                                data-bs-target="#delete_contact">
+                                                <mat-icon class="text-danger">delete</mat-icon>
+                                            </button>
+                                        </td>
+                                    </ng-container>
+    
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+                                    <!-- Row shown when there is no matching data. -->
+                                    <tr class="mat-row" *matNoDataRow>
+                                        @if (isLoadingData){
+                                        <button disabled class="btn btn-primary">
+                                            <div class="spinner-border" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                        </button>
+                                        } @else {
+                                        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                                        }
+                                    </tr>
+                                </table>
+                            </div>
+                            <mat-paginator [length]="length" [pageSize]="pageSize"
+                                [pageSizeOptions]="[15, 20, 30, 40, 50, 80, 100]" showFirstLastButtons
+                                (page)="onPageChange($event)" aria-label="Select page">
+                            </mat-paginator>
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <div class="datatable-length"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="datatable-paginate"></div>
+                                </div>
+                            </div>
+                            <!-- /Projects List -->
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Page Wrapper -->
+ 
+<!-- Add New Contracts -->
+<div class="offcanvas offcanvas-end offcanvas-large" tabindex="-1" id="offcanvas_add">
+
+    <div class="offcanvas-header border-bottom">
+        <h4>Add New province</h4>
+        <button type="button"
+            class="btn-close custom-btn-close border p-1 me-0 d-flex align-items-center justify-content-center rounded-circle"
+            data-bs-dismiss="offcanvas" aria-label="Close">
+            <i class="ti ti-x"></i>
+        </button>
+    </div>
+    <div class="offcanvas-body">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label class="col-form-label" for="name">
+                        Select province
+                        <span class="text-danger">*</span>
+                    </label>
+                    <mat-select class="select custom-mat-select" formControlName="name" placeholder="Choose province">
+                        <mat-option *ngFor="let item of provinceList" value="{{item}}">
+                            {{item}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formGroup.controls['name'].hasError('required')">
+                        Ce champs est obligatoire
+                    </mat-error>
+                </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-end">
+                <button type="button" data-bs-dismiss="offcanvas" class="btn btn-light me-2">Cancel</button>
+                @if (isLoading) {
+                <button disabled class="btn btn-primary">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </button>
+                }
+                @if (!isLoading) {
+                <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="offcanvas"
+                    data-bs-target="#create_success">Create</button>
+                }
+            </div>
+        </form>
+    </div>
+
+</div>
+<!-- /Add New Contracts -->
+
+
+<!-- Edit Contracts -->
+<div class="offcanvas offcanvas-end offcanvas-large" tabindex="-1" id="offcanvas_edit">
+
+    <div class="offcanvas-header border-bottom">
+        <h4>Edit province</h4>
+        <button type="button"
+            class="btn-close custom-btn-close border p-1 me-0 d-flex align-items-center justify-content-center rounded-circle"
+            data-bs-dismiss="offcanvas" aria-label="Close">
+            <i class="ti ti-x"></i>
+        </button>
+    </div>
+    <div class="offcanvas-body">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmitUpdate()">
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label class="col-form-label" for="name">
+                        Select province
+                        <span class="text-danger">*</span>
+                    </label>
+                    <mat-select class="select custom-mat-select" formControlName="name" placeholder="Choose province">
+                        <mat-option *ngFor="let item of provinceList" value="{{item}}">
+                            {{item}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-end">
+                <button type="button" data-bs-dismiss="offcanvas" class="btn btn-light me-2">Cancel</button>
+                @if (isLoading) {
+                <button disabled class="btn btn-primary">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </button>
+                }
+                @if (!isLoading) {
+                <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="offcanvas"
+                    data-bs-target="#create_success">Save Changes</button>
+                }
+            </div>
+        </form>
+    </div>
+
+</div>
+<!-- /Edit Contracts -->
+
+<!-- Delete User -->
+<div class="modal fade" id="delete_contact" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center">
+                    <div class="avatar avatar-xl bg-danger-light rounded-circle mb-3">
+                        <i class="ti ti-trash-x fs-36 text-danger"></i>
+                    </div>
+                    <h4 class="mb-2">Remove item?</h4>
+                    <p class="mb-0">Are you sure you want to remove it</p>
+                    <div class="d-flex align-items-center justify-content-center mt-4">
+                        <a href="javascript:void(0);" class="btn btn-light me-2" data-bs-dismiss="modal">Cancel</a>
+                        <button (click)="delete()" class="btn btn-danger" data-bs-dismiss="modal">
+                            Yes, Delete it
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Delete User -->
+<!-- /Delete Contracts -->

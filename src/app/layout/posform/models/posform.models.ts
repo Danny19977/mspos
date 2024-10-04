@@ -1,0 +1,52 @@
+export interface IPosForm { 
+    id: number;
+    id_unique: string;
+    eq: number;
+    eq1: number;
+    sold: number;
+    dhl: number;
+    dhl1: number;
+    ar: number;
+    ar1: number;
+    sbl: number;
+    sbl1: number;
+    pmf: number;
+    pmf1: number;
+    pmm: number;
+    pmm1: number;
+    ticket: number;
+    ticket1: number;
+    mtc: number;
+    mtc1: number;
+    ws: number;
+    ws1: number;
+    mast: number;
+    mast1: number;
+    oris: number;
+    oris1: number;
+    elite: number; 
+    elite1: number;
+    yes: number;
+    yes1: number;
+    time: number;
+    time1: number;
+    comment: string;
+    user_id: number;
+    province_id: number;
+    area_id : number;
+    sup_id: number;
+    pos_id: number; 
+    signature : string;
+    CreatedAt: Date;
+    UpdatedAt: Date;
+
+    user: string;
+    province: string;
+    area : string;
+    sup: string;
+    pos: string; 
+
+    latitude: number;
+    longitude: number;
+    price: string; 
+}
