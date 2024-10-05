@@ -52,7 +52,11 @@ export class AreaListComponent implements OnInit {
   provinceList: IProvince[] = [];
   supList: ISup[] = [];
 
+<<<<<<< HEAD
   communeList: string[] = ['Collab'];
+=======
+  communeList: string[] = [];
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
 
 
   constructor( 
@@ -146,6 +150,11 @@ export class AreaListComponent implements OnInit {
       this.paginator.length = res.pagination.length;
       this.dataSource.sort = this.sort; 
 
+<<<<<<< HEAD
+=======
+      console.log("datalist", this.dataList)
+
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
       this.isLoadingData = false;
     });
   }
@@ -200,7 +209,11 @@ export class AreaListComponent implements OnInit {
               'AREA',
               this.currentUser.id,
               'created',
+<<<<<<< HEAD
               'Created new AREA',
+=======
+              `Created new AREA ${res.data.id}`,
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
               this.currentUser.fullname
             ).subscribe({
               next: () => {
@@ -240,12 +253,20 @@ export class AreaListComponent implements OnInit {
       };
       this.areaService.update(this.idItem, body)
         .subscribe({
+<<<<<<< HEAD
           next: () => {
+=======
+          next: (res) => {
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
             this.logActivity.activity(
               'AREA',
               this.currentUser.id,
               'updated',
+<<<<<<< HEAD
               'Update AREA',
+=======
+              `Updated AREA ${res.data.id}`,
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
               this.currentUser.fullname
             ).subscribe({
               next: () => {
@@ -291,7 +312,28 @@ export class AreaListComponent implements OnInit {
       .delete(this.idItem)
       .subscribe({
         next: () => {
+<<<<<<< HEAD
           this.toastr.info('Supprimé avec succès!', 'Success!');
+=======
+          this.logActivity.activity(
+            'AREA',
+            this.currentUser.id,
+            'deleted', 
+            `Delete AREA ${this.idItem}`,
+            this.currentUser.fullname
+          ).subscribe({
+            next: () => {
+              this.formGroup.reset();
+              this.toastr.info('Supprimé avec succès!', 'Success!');
+              this.isLoading = false;
+            },
+            error: (err) => {
+              this.isLoading = false;
+              this.toastr.error(`${err.error.message}`, 'Oupss!');
+              console.log(err);
+            }
+          });
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
         },
         error: err => {
           this.toastr.error('Une erreur s\'est produite!', 'Oupss!');

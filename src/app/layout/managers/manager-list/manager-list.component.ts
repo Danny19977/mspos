@@ -190,7 +190,11 @@ export class ManagerListComponent implements OnInit {
               'Manager',
               this.currentUser.id,
               'created',
+<<<<<<< HEAD
               'Created new Manager',
+=======
+              `Created new Manager ${res.data.id}`,
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
               this.currentUser.fullname
             ).subscribe({
               next: () => {
@@ -227,12 +231,21 @@ export class ManagerListComponent implements OnInit {
       };
       this.managerService.update(this.idItem, body)
         .subscribe({
+<<<<<<< HEAD
           next: () => {
             this.logActivity.activity(
               'Manager',
               this.currentUser.id,
               'updated',
               'Update Manager',
+=======
+          next: (res) => {
+            this.logActivity.activity(
+              'Manager',
+              this.currentUser.id,
+              'updated', 
+              `Updated Manager ${res.data.id}`,
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
               this.currentUser.fullname
             ).subscribe({
               next: () => {
@@ -266,6 +279,7 @@ export class ManagerListComponent implements OnInit {
       this.formGroup.patchValue({
         name: this.dataItem.name,
       });
+<<<<<<< HEAD
     }
     );
     // this.dataList.forEach(item => { 
@@ -282,6 +296,9 @@ export class ManagerListComponent implements OnInit {
     //     }
     //   }
     // });
+=======
+    } ); 
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
   }
 
 
@@ -291,7 +308,28 @@ export class ManagerListComponent implements OnInit {
       .delete(this.idItem)
       .subscribe({
         next: () => {
+<<<<<<< HEAD
           this.toastr.info('Supprimé avec succès!', 'Success!');
+=======
+          this.logActivity.activity(
+            'Manager',
+            this.currentUser.id,
+            'deleted', 
+            `Delete Manager ${this.idItem}`,
+            this.currentUser.fullname
+          ).subscribe({
+            next: () => {
+              this.formGroup.reset();
+              this.toastr.info('Supprimé avec succès!', 'Success!');
+              this.isLoading = false;
+            },
+            error: (err) => {
+              this.isLoading = false;
+              this.toastr.error(`${err.error.message}`, 'Oupss!');
+              console.log(err);
+            }
+          });
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
         },
         error: err => {
           this.toastr.error('Une erreur s\'est produite!', 'Oupss!');

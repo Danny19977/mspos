@@ -39,7 +39,11 @@ export abstract class ApiService {
   // @Cacheable({ cacheBusterObserver: cacheBuster$ })
   getPaginatedById(id: number, pageSize: number, pageNumber: number): Observable<any> {
     const params = { page_size: pageSize, page_number: pageNumber };
+<<<<<<< HEAD
     return this.http.get<any>(`${this.endpoint}/paginate/${id}`, { params });
+=======
+    return this.http.get<any>(`${this.endpoint}/all/paginate/${id}`, { params });
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
   }
  
   // @Cacheable({ cacheBusterObserver: cacheBuster$ })

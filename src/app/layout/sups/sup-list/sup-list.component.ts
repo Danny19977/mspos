@@ -191,8 +191,13 @@ export class SupListComponent implements OnInit {
             this.logActivity.activity(
               'Supervisor',
               this.currentUser.id,
+<<<<<<< HEAD
               'created',
               'Created new sup',
+=======
+              'created', 
+              `Created new sup ${res.data.id}`,
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
               this.currentUser.fullname
             ).subscribe({
               next: () => {
@@ -231,12 +236,21 @@ export class SupListComponent implements OnInit {
       };
       this.supService.update(this.idItem, body)
       .subscribe({
+<<<<<<< HEAD
         next: () => {
           this.logActivity.activity(
             'Supervisor',
             this.currentUser.id,
             'updated',
             'Update sup',
+=======
+        next: (res) => {
+          this.logActivity.activity(
+            'Supervisor',
+            this.currentUser.id,
+            'updated', 
+            `Updated sup ${res.data.id}`,
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
             this.currentUser.fullname
           ).subscribe({
             next: () => {
@@ -297,7 +311,28 @@ export class SupListComponent implements OnInit {
     .delete(this.idItem)
     .subscribe({
       next: () => {
+<<<<<<< HEAD
         this.toastr.info('Supprimé avec succès!', 'Success!'); 
+=======
+        this.logActivity.activity(
+          'Sup',
+          this.currentUser.id,
+          'deleted', 
+          `Delete sup ${this.idItem}`,
+          this.currentUser.fullname
+        ).subscribe({
+          next: () => {
+            this.formGroup.reset();
+            this.toastr.info('Supprimé avec succès!', 'Success!');
+            this.isLoading = false;
+          },
+          error: (err) => {
+            this.isLoading = false;
+            this.toastr.error(`${err.error.message}`, 'Oupss!');
+            console.log(err);
+          }
+        });
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
       },
       error: err => {
         this.toastr.error('Une erreur s\'est produite!', 'Oupss!');

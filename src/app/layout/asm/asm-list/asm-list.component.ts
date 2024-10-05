@@ -193,7 +193,11 @@ export class AsmListComponent implements OnInit {
               'ASM',
               this.currentUser.id,
               'created',
+<<<<<<< HEAD
               'Created new ASM',
+=======
+             `Created new ASM ${res.data.id}`,
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
               this.currentUser.fullname
             ).subscribe({
               next: () => {
@@ -231,12 +235,20 @@ export class AsmListComponent implements OnInit {
       };
       this.asmService.update(this.idItem, body)
       .subscribe({
+<<<<<<< HEAD
         next: () => {
+=======
+        next: (res) => {
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
           this.logActivity.activity(
             'ASM',
             this.currentUser.id,
             'updated',
+<<<<<<< HEAD
             'Update ASM',
+=======
+            `Updated ASM ${res.data.id}`,
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
             this.currentUser.fullname
           ).subscribe({
             next: () => {
@@ -280,7 +292,28 @@ export class AsmListComponent implements OnInit {
     .delete(this.idItem)
     .subscribe({
       next: () => {
+<<<<<<< HEAD
         this.toastr.info('Supprimé avec succès!', 'Success!'); 
+=======
+        this.logActivity.activity(
+          'ASM',
+          this.currentUser.id,
+          'deleted', 
+          `Delete ASM ${this.idItem}`,
+          this.currentUser.fullname
+        ).subscribe({
+          next: () => {
+            this.formGroup.reset();
+            this.toastr.info('Supprimé avec succès!', 'Success!');
+            this.isLoading = false;
+          },
+          error: (err) => {
+            this.isLoading = false;
+            this.toastr.error(`${err.error.message}`, 'Oupss!');
+            console.log(err);
+          }
+        });
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
       },
       error: err => {
         this.toastr.error('Une erreur s\'est produite!', 'Oupss!');

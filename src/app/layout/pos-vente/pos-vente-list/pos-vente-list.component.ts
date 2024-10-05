@@ -224,8 +224,13 @@ export class PosVenteListComponent implements OnInit {
             this.logActivity.activity(
               'POS',
               this.currentUser.id,
+<<<<<<< HEAD
               'created',
               'Created new pos',
+=======
+              'created', 
+              `Created new pos ${res.data.id}`,
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
               this.currentUser.fullname
             ).subscribe({
               next: () => {
@@ -279,12 +284,21 @@ export class PosVenteListComponent implements OnInit {
       };
       this.posVenteService.update(this.idItem, body)
         .subscribe({
+<<<<<<< HEAD
           next: () => {
             this.logActivity.activity(
               'POS',
               this.currentUser.id,
               'updated',
               'Update Pos',
+=======
+          next: (res) => {
+            this.logActivity.activity(
+              'POS',
+              this.currentUser.id,
+              'updated', 
+              `Updated Pos ${res.data.id}`,
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
               this.currentUser.fullname
             ).subscribe({
               next: () => {
@@ -375,7 +389,28 @@ export class PosVenteListComponent implements OnInit {
       .delete(this.idItem)
       .subscribe({
         next: () => {
+<<<<<<< HEAD
           this.toastr.info('Supprimé avec succès!', 'Success!');
+=======
+          this.logActivity.activity(
+            'POS',
+            this.currentUser.id,
+            'deleted', 
+            `Delete pos ${this.idItem}`,
+            this.currentUser.fullname
+          ).subscribe({
+            next: () => {
+              this.formGroup.reset();
+              this.toastr.info('Supprimé avec succès!', 'Success!');
+              this.isLoading = false;
+            },
+            error: (err) => {
+              this.isLoading = false;
+              this.toastr.error(`${err.error.message}`, 'Oupss!');
+              console.log(err);
+            }
+          });
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
         },
         error: err => {
           this.toastr.error('Une erreur s\'est produite!', 'Oupss!');

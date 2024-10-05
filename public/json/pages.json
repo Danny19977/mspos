@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "data": [
     {
@@ -45,3 +46,52 @@
   ],
   "totalData": 6
 }
+=======
+{
+  "data": [
+    {
+      "id": 1,
+      "pages": "Home",
+      "page_slug": "home",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "pages": "About Us",
+      "page_slug": "about-us",
+      "status": "Inactive"
+    },
+    {
+      "id": 3,
+      "pages": "FAQ",
+      "page_slug": "faq",
+      "status": "Active"
+    },
+    {
+      "id": 4,
+      "pages": "Categories",
+      "page_slug": "categories",
+      "status": "Active"
+    },
+    {
+      "id": 5,
+      "pages": "Terms & Conditions",
+      "page_slug": "terms-conditions",
+      "status": "Active"
+    },
+    {
+      "id": 6,
+      "pages": "Privacy Policy",
+      "page_slug": "privacy policy",
+      "status": "Active"
+    },
+    {
+      "id": 7,
+      "pages": "Contact US",
+      "page_slug": "contact-us",
+      "status": "Active"
+    }
+  ],
+  "totalData": 6
+}
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204

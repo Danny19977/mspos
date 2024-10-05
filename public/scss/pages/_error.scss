@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .error-page {
     background: $white;
 }
@@ -22,4 +23,30 @@
 }
 .error-img {
     max-width: 500px;
+=======
+.error-page {
+    background: $white;
+}
+.comming-shapes {
+    position: relative;
+    @include respond-below(custom991) {
+        display: none;
+    }
+    .comming-right-shape {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    .comming-left-shape {
+        position: fixed;
+        bottom: -5px;
+        right: 0;
+    }
+    img {
+        width: 500px;
+    }
+}
+.error-img {
+    max-width: 500px;
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
  }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component } from '@angular/core';
 import {
   pageSelection,
@@ -40,3 +41,47 @@ export class PageChange {
 
 
 }
+=======
+import { Component } from '@angular/core';
+import {
+  pageSelection,
+  PaginationService,
+} from '../custom-pagination/pagination.service';
+
+@Component({
+  selector: 'app-page-change',
+  templateUrl: './page-change.component.html',
+})
+ 
+export class PageChange {
+  public pageSize = 10;
+  // pagination variables
+  public skip = 0;
+  public limit: number = this.pageSize;
+  public currentPage = 1;
+  public pageSelection: pageSelection[] = [];
+  //** / pagination variables
+
+  constructor(private pagination: PaginationService) {
+
+  }
+
+   
+
+  
+  public changePageSize(pageSize: number): void {
+    this.pageSelection = [];
+    this.limit = pageSize;
+    this.skip = 0;
+    this.currentPage = 1;
+    // this.getTableData();
+    this.pagination.tablePageSize.next({
+      skip: this.skip,
+      limit: this.limit,
+      pageSize: this.pageSize,
+    });
+  }
+
+
+}
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204

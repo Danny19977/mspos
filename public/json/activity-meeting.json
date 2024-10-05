@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "data": [
     {
@@ -17,3 +18,24 @@
   ],
   "totalData":2
 }
+=======
+{
+  "data": [
+    {
+      "id": 1,
+      "title": "We scheduled a meeting for next week",
+      "due_date": "25 Sep 2023, 12:12 pm",
+      "owner": "Hendry",
+      "created_date": "22 Sep 2023, 10:14 am"
+    },
+    {
+      "id": 2,
+      "title": "Will have a meeting before project start",
+      "due_date": "27 Oct 2023, 12:30 pm",
+      "owner": "Sally",
+      "created_date": "21 Oct 2023, 03:00 pm"
+    }
+  ],
+  "totalData":2
+}
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204

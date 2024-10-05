@@ -26,8 +26,12 @@ export class LogsListComponent implements OnInit {
   pageSize: number = 15;
   pageIndex: number = 0;
   length: number = 0;
+<<<<<<< HEAD
 
   // Table 
+=======
+ 
+>>>>>>> d0702d2df73e33dd270d73061880d510727a5204
   displayedColumns: string[] = ['created', 'fullname', 'title', 'name', 'action', 'description'];
   dataSource = new MatTableDataSource<UserLogsModel>(this.dataList);
 
